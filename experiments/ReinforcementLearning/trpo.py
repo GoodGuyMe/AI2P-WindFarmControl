@@ -6,7 +6,7 @@ from sb3_contrib import TRPO
 from stable_baselines3 import A2C
 from stable_baselines3.common.callbacks import EveryNTimesteps, CheckpointCallback
 
-from experiments.LESReinforcement.env import create_env
+from experiments.ReinforcementLearning.env import create_env
 from utils.rl_utils import create_validation_points
 from utils.sb3_callbacks import FigureRecorderCallback, TestComparisonCallback, ComparisonCallback
 
