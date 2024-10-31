@@ -172,7 +172,7 @@ def create_env(case=1, max_episode_steps=100, render_mode="matplotlib", map_size
     model_cfg = get_pignn_config()
     deconv_model = DeConvNet(1, [64, 128, 256, 1], output_size=map_size[0])
     model = FlowPIGNN(**model_cfg, deconv_model=deconv_model)
-    model.load_state_dict(torch.load("model_case01/pignn_best.pt"))
+    model.load_state_dict(torch.load("pretrained_model/pignn_best.pt"))
 
     turbines = "12_to_15" if case == 1 else "06_to_09" if case == 2 else "00_to_03"
     layout_file = f"../../data/Case_0{case}/HKN_{turbines}_layout_balanced.csv"
