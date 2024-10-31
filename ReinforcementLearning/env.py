@@ -16,7 +16,7 @@ from PIGNN.experiment import get_pignn_config
 from utils.extract_windspeed import WindSpeedExtractor
 from utils.preprocessing import read_turbine_positions, angle_to_vec, create_turbine_graph_tensors, correct_angles
 from utils.rl_utils import wind_speed_to_power
-from utils.visualization import plot_mean_absolute_speed, get_mean_absolute_speed_figure
+from utils.visualization import plot_mean_absolute_speed, get_mean_absolute_speed_figure, get_layout_file
 
 device = torch.device("cpu")
 
@@ -174,8 +174,7 @@ def create_env(case=1, max_episode_steps=100, render_mode="matplotlib", map_size
     model = FlowPIGNN(**model_cfg, deconv_model=deconv_model)
     model.load_state_dict(torch.load("pretrained_model/pignn_best.pt"))
 
-    turbines = "12_to_15" if case == 1 else "06_to_09" if case == 2 else "00_to_03"
-    layout_file = f"../../data/Case_0{case}/HKN_{turbines}_layout_balanced.csv"
+    layout_file = get_layout_file(case)
     turbine_locations = read_turbine_positions(layout_file)
 
     env = TimeLimit(TurbineEnv(model, turbine_locations, render_mode=render_mode, map_size=map_size[0]), max_episode_steps=max_episode_steps)
