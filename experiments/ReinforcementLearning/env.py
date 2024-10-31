@@ -10,9 +10,9 @@ from gymnasium.utils import env_checker
 
 import numpy as np
 
-from architecture.pignn.deconv import DeConvNet
-from architecture.pignn.pignn import FlowPIGNN
-from experiments.graphs.graph_experiments import get_pignn_config
+from experiments.PIGNN.architecture.deconv import DeConvNet
+from experiments.PIGNN.architecture.pignn import FlowPIGNN
+from experiments.PIGNN.experiment import get_pignn_config
 from utils.extract_windspeed import WindSpeedExtractor
 from utils.preprocessing import read_turbine_positions, angle_to_vec, create_turbine_graph_tensors, correct_angles
 from utils.rl_utils import wind_speed_to_power

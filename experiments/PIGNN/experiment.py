@@ -1,4 +1,3 @@
-import argparse
 import json
 import os
 import torch
@@ -10,9 +9,9 @@ from datetime import datetime
 
 from torch.optim import Adam
 
-from architecture.pignn.pignn import FlowPIGNN
-from architecture.pignn.deconv import FCDeConvNet, DeConvNet
-from architecture.windspeedLSTM.windspeedLSTM import WindspeedLSTM, WindSpeedLSTMDeConv
+from experiments.PIGNN.architecture.pignn import FlowPIGNN
+from experiments.PIGNN.architecture.deconv import FCDeConvNet, DeConvNet
+from experiments.LSTM.architecture.windspeedLSTM import WindspeedLSTM, WindSpeedLSTMDeConv
 from experiments.PIGNN.dataset import create_data_loaders, get_dataset
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
