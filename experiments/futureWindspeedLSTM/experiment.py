@@ -25,7 +25,7 @@ def load_config(case):
             ],
         "sequence_length": 50,
         "batch_size": 4,
-        "scale": (300, 300)
+        "scale": (128, 128)
     }
 
 
@@ -37,7 +37,7 @@ def create_transform(scale):
 
 
 def run():
-    case = 123
+    case = 1
     config = load_config(case)
 
     sequence_length = config["sequence_length"]

@@ -2,15 +2,15 @@ from utils.extract_windspeed import WindSpeedExtractor
 from utils.preprocessing import read_turbine_positions
 import numpy as np
 from utils.rl_utils import create_validation_points
-from utils.visualization import plot_mean_absolute_speed_subplot
+from utils.visualization import plot_mean_absolute_speed_subplot, plot_prediction_vs_real
 from matplotlib import pyplot as plt
-from stable_baselines3 import SAC
-from experiments.LESReinforcement.env_continuous import create_env
+from stable_baselines3 import SAC, A2C
+from experiments.LESReinforcement.env import create_env
 
 from utils.preprocessing import read_measurement
 
 env = create_env(render_mode="rgb_array")
-model = SAC.load("SACTurbineEnvModel")
+model = A2C.load("A2CTurbineEnvModel")
 
 case_nr = 1
 seed = 42
@@ -26,7 +26,6 @@ avg_sim_steering_power = np.mean([point['wake_power'] for point in val_points])
 
 print(f"sim greedy power: {avg_sim_greedy_power}")
 print(f"sim wake power: {avg_sim_steering_power}")
-
 # avg_power_greedy = np.mean(np.sum(read_measurement(f"../../data/Case_0{case_nr}/measurements_turbines/30000_BL/", "powerRotor"), axis=0))
 # avg_power_steering = np.mean(np.sum(read_measurement(f"../../data/Case_0{case_nr}/measurements_turbines/30000_LuT2deg_internal/", "powerRotor"), axis=0))
 #
@@ -40,7 +39,7 @@ wind_speed_extractor = WindSpeedExtractor(turbine_locations, 128)
 
 for val_point in val_points:
     greedy_yaws = np.ones(10, dtype=float) * val_point["wind_direction"]
-    greedy_actions = np.zeros(10, dtype=float)
+    greedy_actions = np.ones(10, dtype=float) * 7
     options = {"wind_direction": np.array([val_point["wind_direction"]]), "yaws": greedy_yaws}
 
     # Simulation greedy
@@ -64,6 +63,7 @@ for val_point in val_points:
     model_val_power.append(rewards_model)
     model_wake_map, _, model_wake_turb_pixels = env.get_render_info()
 
+    plot_prediction_vs_real(model_wake_map, val_point["wake_map"])
     fig, axes = plt.subplots(2, 2, figsize=(12, 12))
     img1 = plot_mean_absolute_speed_subplot(axes[0, 0], val_point["greedy_map"], wind_vec, layout_file, sim_greedy_turb_pixels, color_bar=False)
     plot_mean_absolute_speed_subplot(axes[0, 1], model_greedy_map, wind_vec, layout_file, model_greedy_turb_pixels, color_bar=False)
@@ -81,6 +81,7 @@ for val_point in val_points:
 
     cbar_ax = fig.add_axes([0.92, 0.1, 0.02, 0.8])
     fig.colorbar(img1, cax=cbar_ax, orientation='vertical')
+    plt.show()
 
 mean_greedy_power = np.mean(greedy_val_power)
 mean_steering_power = np.mean(model_val_power)

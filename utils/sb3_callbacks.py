@@ -33,7 +33,7 @@ class ComparisonCallback(BaseCallback):
         _, rewards_greedy, _, _, info_greedy = self.eval_env.step(greedy)
         fig_greedy = self.eval_env.render()
         if fig_greedy:
-            self.logger.record("evaluation/greedy", Figure(fig_greedy, close=True), exclude=("stdout", "log", "json", "csv"))
+            self.logger.record("map/greedy", Figure(fig_greedy, close=True), exclude=("stdout", "log", "json", "csv"))
             plt.close()
 
         # Model control
@@ -42,20 +42,9 @@ class ComparisonCallback(BaseCallback):
         _, rewards_model, _, _, info_model = self.eval_env.step(action)
         fig_model = self.eval_env.render()
         if fig_model:
-            self.logger.record("trajectory/model", Figure(fig_model, close=True), exclude=("stdout", "log", "json", "csv"))
+            self.logger.record("map/model", Figure(fig_model, close=True), exclude=("stdout", "log", "json", "csv"))
             plt.close()
 
-        self.logger.record("evaluation/greedy_wind_speeds", np.mean(info_greedy['wind_speed']))
-        self.logger.record("evaluation/model_wind_speeds", np.mean(info_model['wind_speed']))
-        self.logger.record("evaluation/min_greedy_wind_speeds", np.min(info_greedy['wind_speed']))
-        self.logger.record("evaluation/min_model_wind_speeds", np.min(info_model['wind_speed']))
-        self.logger.record("evaluation/max_greedy_wind_speeds", np.max(info_greedy['wind_speed']))
-        self.logger.record("evaluation/max_model_wind_speeds", np.max(info_model['wind_speed']))
-
-        self.logger.record("evaluation/greedy_reward", rewards_greedy)
-        self.logger.record("evaluation/model_reward", rewards_model)
-        print(f"rewards_greedy: {rewards_greedy}, rewards_model: {rewards_model}")
-        print(f"info_greedy: {info_greedy['wind_speed']}, info_model: {info_model['wind_speed']}")
         return True
 
 
@@ -73,7 +62,7 @@ class TestComparisonCallback(BaseCallback):
         model_val_power = []
         for val_point in self.val_points:
             greedy_yaws = np.ones(10, dtype=float) * val_point["wind_direction"]
-            greedy_actions = np.zeros(10, dtype=float)
+            greedy_actions = np.ones(10, dtype=float) * 7
             options = {"wind_direction": np.array([val_point["wind_direction"]]), "yaws": greedy_yaws}
 
             # Model greedy

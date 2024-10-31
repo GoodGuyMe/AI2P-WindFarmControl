@@ -42,13 +42,13 @@ class TurbineEnv(gym.Env):
         self._yaws = np.zeros(self.n_turbines, dtype=int)
 
         # Observations that are available to the agent, the current global wind direction and the current yaw angles
-        self.observation_space = spaces.Dict(
-            {
-                "wind_direction": gym.spaces.Box(0, 360, dtype=int),
-                "yaws": spaces.MultiDiscrete([2 * self._n_yaw_steps - 1] * self.n_turbines)
-            }
-        )
-        # self.observation_space = spaces.Box(0, 360, dtype=int)
+        # self.observation_space = spaces.Dict(
+        #     {
+        #         "wind_direction": gym.spaces.Box(0, 360, dtype=int),
+        #         "yaws": spaces.MultiDiscrete([2 * self._n_yaw_steps - 1] * self.n_turbines)
+        #     }
+        # )
+        self.observation_space = spaces.Box(0, 360, dtype=int)
 
         # Actions the agents can take, it can select the new yaw angles for the turbines
         self.action_space = spaces.MultiDiscrete([2 * self._n_yaw_steps - 1] * self.n_turbines)
@@ -63,11 +63,11 @@ class TurbineEnv(gym.Env):
         self.render_mode = render_mode
 
     def _get_obs(self):
-        return {
-            "wind_direction": self._wind_direction,
-            "yaws": self._yaws,
-        }
-        # return self._wind_direction
+        # return {
+        #     "wind_direction": self._wind_direction,
+        #     "yaws": self._yaws,
+        # }
+        return self._wind_direction
 
     def _get_info(self):
         return {
@@ -116,7 +116,7 @@ class TurbineEnv(gym.Env):
 
         # Return tuple in form observation, reward, terminated, truncated, info.
         # Power is the reward, and as of now, the environment does not terminate.
-        return observation, np.sum(power), False, False, info
+        return observation, np.sum(power) / 5000, False, False, info
 
     def predict_wind_speed_map(self, yaws):
         x = torch.tensor(yaws).reshape(-1, 1).float()

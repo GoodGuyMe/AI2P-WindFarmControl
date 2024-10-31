@@ -19,7 +19,7 @@ def create_validation_points(case_nr, num_points, seed=42, map_size=(128, 128), 
 
     turbines = "12_to_15" if case_nr == 1 else "06_to_09" if case_nr == 2 else "00_to_03"
     wind_map_extractor = WindSpeedExtractor(read_turbine_positions(f"../../data/Case_0{case_nr}/HKN_{turbines}_layout_balanced.csv"), map_size[0])
-    data_range = range(30005, 42000 + 1, 5)
+    data_range = range(30005, 42000, 5)
     wind_angles = get_wind_angles_for_range(f"{data_dir}/HKN_{turbines}_dir.csv", data_range, 30000)
     sample_range = list(enumerate(data_range))
     if num_points > len(data_range):

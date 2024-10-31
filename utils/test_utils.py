@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from utils.extract_windspeed import WindSpeedExtractor
 from utils.preprocessing import (read_wind_angles, read_turbine_positions, get_wind_vec_at_time,
                                  create_turbine_nx_graph,
-                                 read_wind_speed_scalars, resize_windspeed, read_measurement)
+                                 read_wind_speed_scalars, resize_windspeed, read_measurement, get_yaws)
 from utils.visualization import plot_graph, plot_mean_absolute_speed
 
 
@@ -53,7 +53,7 @@ def test_resize():
     wind_vec = get_wind_vec_at_time(wind_angles, timestep)
 
     umean_abs = read_wind_speed_scalars("postProcessing_BL", 30000 + timestep, f"Case_0{case}")
-    scaled_umean = resize_windspeed(umean_abs, (128, 128))
+    scaled_umean = resize_windspeed(umean_abs, (300, 300))
 
     plot_mean_absolute_speed(scaled_umean, 100 * wind_vec, layout_file)
 
@@ -62,7 +62,7 @@ def test_extract_windspeed():
     case = 1
     timestep = np.random.randint(0, 2400) * 5
     print(timestep)
-    timestep = 11880
+    timestep = 5165
     turbines = "12_to_15" if case == 1 else "06_to_09" if case == 2 else "00_to_03"
     turbine_data_dir = f"../data/CAse_0{case}/measurements_turbines"
     scale = 300
@@ -92,6 +92,14 @@ def test_extract_windspeed():
 
     plot_mean_absolute_speed(scaled_BL, wind_vec, layout_file, blade_pixels_BL)
     plot_mean_absolute_speed(scaled_LuT2deg, wind_vec, layout_file, blade_pixels_LuT2deg)
+
+
+def test_get_yaws():
+    BL = get_yaws(1, "BL")
+    LuT = get_yaws(1, "LuT2deg_internal")
+
+    print(max(BL))
+    print(max(LuT))
 
 if __name__ == "__main__":
     test_graph_creation_plotting()

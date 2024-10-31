@@ -83,8 +83,8 @@ def add_quiver(ax, wind_vec, center):
               angles='xy', scale_units='xy', scale=1, color='red', label='Wind Direction')
 
 
-def add_imshow(fig, ax, umean_abs, color_bar=True):
-    axesImage = ax.imshow(umean_abs, extent=(0, 128, 0, 128), origin='lower', aspect='equal', vmin=0, vmax=10)
+def add_imshow(fig, ax, umean_abs, color_bar=True, image_size=128):
+    axesImage = ax.imshow(umean_abs, extent=(0, image_size, 0, image_size), origin='lower', aspect='equal', vmin=0, vmax=10)
     if color_bar:
         fig.colorbar(axesImage, ax=ax, label='Mean Velocity (UmeanAbs)')
     return axesImage
@@ -163,28 +163,28 @@ def plot_graph(G, wind_vec, max_angle=90, ax=None):
     ax.set_aspect('equal')
 
 
-def plot_prediction_vs_real(predicted, target, case=1, number=0):
+def plot_prediction_vs_real(predicted, target, case=1, number=0, image_size=128):
     layout_file = get_layout_file(case)
 
     fig, axs = plt.subplots(1, 2, figsize=(12, 6))  # 1 row, 2 columns
 
     # Plot target
-    img1 = add_imshow(fig, axs[0], target, color_bar=False)
+    img1 = add_imshow(fig, axs[0], target, color_bar=False, image_size=image_size)
     axs[0].set_title('Target')
     axs[0].set_aspect('equal', adjustable='box')  # Maintain aspect ratio
-    add_windmills(axs[0], layout_file)
+    add_windmills(axs[0], layout_file, image_size=image_size)
 
     # Plot predicted
-    add_imshow(fig, axs[1], predicted, color_bar=False)
+    add_imshow(fig, axs[1], predicted, color_bar=False, image_size=image_size)
     axs[1].set_title('Predicted')
     axs[1].set_aspect('equal', adjustable='box')  # Maintain aspect ratio
-    add_windmills(axs[1], layout_file)
+    add_windmills(axs[1], layout_file, image_size=image_size)
 
-    cbar_ax = fig.add_axes([1.02, 0, 0.02, 1])  # [left, bottom, width, height]
-    fig.colorbar(img1, cax=cbar_ax, orientation='vertical')
+    cbar_ax = fig.add_axes([0.92, 0.1, 0.02, 0.8])  # [left, bottom, width, height]
+    fig.colorbar(img1, cax=cbar_ax, orientation='vertical', label='Wind Speed (m/s)')
 
     # Adjust layout
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.savefig(f'predictions_vs_targets_{number}.pdf', format='pdf', bbox_inches='tight')
     plt.show()
 
@@ -194,6 +194,10 @@ def animate_prediction_vs_real(umean_callback, n_frames=100, file_path="animatio
     target, prediction = umean_callback(0)
     axis_image_target = add_imshow(fig, axs[0], target)
     axis_image_predicted = add_imshow(fig, axs[1], prediction)
+
+    add_windmills(axs[0], get_layout_file(1))
+    add_windmills(axs[1], get_layout_file(1))
+
 
     def animate(i):
         target, prediction = umean_callback(i)

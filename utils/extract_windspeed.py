@@ -9,7 +9,7 @@ class WindSpeedExtractor:
         self.n_turbines = len(turbine_locations)
 
         scale_factor = map_size / 5000
-        # print(f"One pixel = {round(1/scale_factor, 2)}m")
+        print(f"One pixel = {round(1/scale_factor, 2)}m")
 
         self.offset = np.array([-4, 0])
 

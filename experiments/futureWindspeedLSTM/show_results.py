@@ -93,5 +93,4 @@ def plot(animate: bool, latest=None, start=None):
 
 
 if __name__ == '__main__':
-    plot(True, start=0)
-    plot(False, start=0)
+    plot(False, latest="20241028152758_Case01")
