@@ -6,7 +6,7 @@ from utils.visualization import plot_mean_absolute_speed_subplot, plot_predictio
 from matplotlib import pyplot as plt
 from stable_baselines3 import A2C, PPO
 from sb3_contrib import TRPO
-from experiments.ReinforcementLearning.env import create_env
+from ReinforcementLearning.env import create_env
 
 def main(model, case_nr=1, seed=42, num_val_points = 1000, map_size=(128,128)):
     env = create_env(case=case_nr, map_size=map_size)

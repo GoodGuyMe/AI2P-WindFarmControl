@@ -9,10 +9,10 @@ from datetime import datetime
 
 from torch.optim import Adam
 
-from experiments.PIGNN.architecture.pignn import FlowPIGNN
-from experiments.PIGNN.architecture.deconv import FCDeConvNet, DeConvNet
-from experiments.LSTM.architecture.windspeedLSTM import WindspeedLSTM, WindSpeedLSTMDeConv
-from experiments.PIGNN.dataset import create_data_loaders, get_dataset
+from PIGNN.architecture.pignn import FlowPIGNN
+from PIGNN.architecture.deconv import FCDeConvNet, DeConvNet
+from LSTM.architecture.windspeedLSTM import WindspeedLSTM, WindSpeedLSTMDeConv
+from PIGNN.dataset import create_data_loaders, get_dataset
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 generator = torch.Generator()

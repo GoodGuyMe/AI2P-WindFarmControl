@@ -175,4 +175,4 @@ cython_debug/
 #.idea/
 /experiments/LESReinforcement/models/
 /experiments/LESReinforcement/turbine_env/
-/experiments/LSTM/results/
+/LSTM/results/

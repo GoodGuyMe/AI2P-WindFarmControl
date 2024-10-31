@@ -1,9 +1,9 @@
 from torch import nn
 import torch
 
-from experiments.PIGNN.architecture.deconv import DeConvNet
-from experiments.PIGNN.architecture.mlp import MLP
-from experiments.LSTM.architecture.custom_unet import CustomUNet
+from PIGNN.architecture.deconv import DeConvNet
+from PIGNN.architecture.mlp import MLP
+from LSTM.architecture.custom_unet import CustomUNet
 
 
 class WindspeedLSTM(nn.Module):

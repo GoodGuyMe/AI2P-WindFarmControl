@@ -47,7 +47,7 @@ def create_data_loaders(dataset, batch_size):
     return train_loader, val_loader, test_loader
 
 if __name__ == '__main__':
-    root_dir = "../../data/Case_01/measurements_flow/postProcessing_LuT2deg_internal/windspeedMapScalars"
+    root_dir = "../data/Case_01/measurements_flow/postProcessing_LuT2deg_internal/windspeedMapScalars"
     dataset = WindspeedMapDataset(root_dir, 50)
     print(len(dataset))
     i = 0

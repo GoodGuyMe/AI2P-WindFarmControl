@@ -4,8 +4,8 @@ import numpy as np
 import torch
 import json
 
-from experiments.LSTM.architecture.windspeedLSTM import WindspeedLSTM
-from experiments.LSTM.dataset import create_data_loaders, get_dataset
+from LSTM.architecture.windspeedLSTM import WindspeedLSTM
+from LSTM.dataset import create_data_loaders, get_dataset
 from utils.preprocessing import resize_windspeed
 from utils.visualization import plot_prediction_vs_real, animate_prediction_vs_real
 

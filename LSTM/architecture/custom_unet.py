@@ -1,6 +1,6 @@
 """ Full assembly of the parts to form the complete network """
 
-from experiments.LSTM.architecture.unet_parts import *
+from LSTM.architecture.unet_parts import *
 
 
 class CustomUNet(nn.Module):

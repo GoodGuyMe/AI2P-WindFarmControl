@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from stable_baselines3 import PPO
 
-from experiments.ReinforcementLearning.env import create_env
+from ReinforcementLearning.env import create_env
 from utils.rl_utils import create_validation_points
 from utils.sb3_callbacks import FigureRecorderCallback, ComparisonCallback, TestComparisonCallback
 from stable_baselines3.common.callbacks import EveryNTimesteps, CheckpointCallback
@@ -17,7 +17,7 @@ def train():
     fig_callback = FigureRecorderCallback(env)
     ntimestep_callback = EveryNTimesteps(n_steps=500, callback=fig_callback)
 
-    checkpoint_callback = CheckpointCallback(save_freq=1000, save_path="./models/", name_prefix="ppo_model")
+    checkpoint_callback = CheckpointCallback(save_freq=1000, save_path="models/", name_prefix="ppo_model")
 
     case_nr = 1
     num_val_points = 100

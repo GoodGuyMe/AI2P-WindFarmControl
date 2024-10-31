@@ -6,8 +6,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from experiments.LSTM.architecture.windspeedLSTM import WindspeedLSTM
-from experiments.LSTM.dataset import create_data_loaders, get_dataset
+from LSTM.architecture.windspeedLSTM import WindspeedLSTM
+from LSTM.dataset import create_data_loaders, get_dataset
 from utils.preprocessing import resize_windspeed
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
