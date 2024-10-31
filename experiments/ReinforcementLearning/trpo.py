@@ -29,7 +29,6 @@ def train():
     eval_callback_2 = EveryNTimesteps(n_steps=1000, callback=ComparisonCallback(eval_env))
 
     model = TRPO("MlpPolicy", env, verbose=1, device=device, tensorboard_log="./turbine_env/", learning_rate=5e-4)
-    # model = TRPO.load("./models/trpo_model_74000_steps.zip", env=env)
     model.learn(total_timesteps=200000, progress_bar=True, tb_log_name="TRPO", reset_num_timesteps=False, callback=[checkpoint_callback, ntimestep_callback, eval_callback, eval_callback_2])
     model.save("TRPOTurbineEnvModel")
 
