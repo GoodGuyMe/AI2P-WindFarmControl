@@ -19,7 +19,7 @@ def prepare_graph_training_data(case_nr=1, wake_steering=False, max_angle=30):
     step = 5
     data_range = range(min_ts, max_ts + 1, step)
 
-    data_dir = f"../../data/Case_0{case_nr}"
+    data_dir = f"../data/Case_0{case_nr}"
     flow_data_dir = f"{data_dir}/measurements_flow/postProcessing_{type}"
     turbine_data_dir = f"{data_dir}/measurements_turbines/30000_{type}"
     turbines = "12_to_15" if case_nr == 1 else "06_to_09" if case_nr == 2 else "00_to_03"

@@ -51,7 +51,7 @@ if __name__ == '__main__':
     dataset = WindspeedMapDataset(root_dir, 50)
     print(len(dataset))
     i = 0
-    train_loader, val_loader, test_loader = create_data_loaders(root_dir, 50, 5)
+    train_loader, val_loader, test_loader = create_data_loaders(dataset, 5)
     for _ in train_loader:
         print(i)
         i += 1

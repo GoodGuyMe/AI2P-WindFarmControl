@@ -244,7 +244,7 @@ def get_dataset_dirs(case_nr, wake_steering, max_angle, use_all_data):
     for case in cases:
         for steering in wake_steering_cases:
             post_fix = "LuT2deg_internal" if steering else "BL"
-            data_folder = f"../../data/Case_0{case}/graphs/{post_fix}/{max_angle}"
+            data_folder = f"../data/Case_0{case}/graphs/{post_fix}/{max_angle}"
             folders.append(data_folder)
 
     return folders

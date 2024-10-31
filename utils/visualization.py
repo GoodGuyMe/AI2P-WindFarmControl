@@ -212,4 +212,4 @@ def animate_prediction_vs_real(umean_callback, n_frames=100, file_path="animatio
 
 def get_layout_file(case):
     turbines = "12_to_15" if case == 1 else "06_to_09" if case == 2 else "00_to_03"
-    return f"../../data/Case_0{case}/HKN_{turbines}_layout_balanced.csv"
+    return f"../data/Case_0{case}/HKN_{turbines}_layout_balanced.csv"
