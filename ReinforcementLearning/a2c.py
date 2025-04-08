@@ -34,7 +34,7 @@ def train():
 
 def predict():
     env = create_env()
-    model = A2C.load("A2CTurbineEnvModel")
+    model = A2C.load("models/a2c_model_200000_steps")
     times = []
 
     for i in range(10):
@@ -49,5 +49,5 @@ def predict():
 
 
 if __name__ == "__main__":
-    # train()
-    predict()
+    train()
+    # predict()

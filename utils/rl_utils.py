@@ -10,7 +10,7 @@ from utils.preprocessing import read_turbine_positions, get_wind_angles_for_rang
 def create_validation_points(case_nr, num_points, seed=42, map_size=(128, 128), return_maps=False):
     points = []
     random.seed(seed)
-    data_dir = f"../../data/Case_0{case_nr}"
+    data_dir = f"../data/Case_0{case_nr}"
 
     greedy_yaw_dir = f"{data_dir}/measurements_turbines/30000_BL"
     wake_yaw_dir = f"{data_dir}/measurements_turbines/30000_LuT2deg_internal"
@@ -18,7 +18,7 @@ def create_validation_points(case_nr, num_points, seed=42, map_size=(128, 128), 
     wake_map_dir = f"{data_dir}/measurements_flow/postProcessing_LuT2deg_internal"
 
     turbines = "12_to_15" if case_nr == 1 else "06_to_09" if case_nr == 2 else "00_to_03"
-    wind_map_extractor = WindSpeedExtractor(read_turbine_positions(f"../../data/Case_0{case_nr}/HKN_{turbines}_layout_balanced.csv"), map_size[0])
+    wind_map_extractor = WindSpeedExtractor(read_turbine_positions(f"{data_dir}/HKN_{turbines}_layout_balanced.csv"), map_size[0])
     data_range = range(30005, 42000, 5)
     wind_angles = get_wind_angles_for_range(f"{data_dir}/HKN_{turbines}_dir.csv", data_range, 30000)
     sample_range = list(enumerate(data_range))
