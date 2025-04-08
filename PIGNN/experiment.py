@@ -320,8 +320,8 @@ if __name__ == "__main__":
     # run(case_nr=1, wake_steering=False, max_angle=90, seq_length=1, output_size=128)
     # run(case_nr=1, wake_steering=False, max_angle=360, seq_length=1, output_size=128)
 
-    # run(case_nr=1, wake_steering=True, max_angle=30, seq_length=50, batch_size=4, output_size=128, use_all_data=False)
-    run(case_nr=1, wake_steering=False, max_angle=30, seq_length=50, batch_size=4, output_size=128, direct_lstm=True)
-    # run(case_nr=1, wake_steering=False, max_angle=30, seq_length=50, batch_size=4, output_size=128, direct_lstm=True)
+    run(case_nr=1, wake_steering=True, max_angle=30, seq_length=50, batch_size=4, output_size=128)
+    # run(case_nr=1, wake_steering=False, max_angle=30, seq_length=50, batch_size=4, output_size=128)
+    # run(case_nr=1, wake_steering=True, max_angle=30, seq_length=50, batch_size=4, output_size=128, direct_lstm=True)
     # run(case_nr=1, wake_steering=True, max_angle=90, seq_length=1, output_size=128)
     # run(case_nr=1, wake_steering=True, max_angle=360, seq_length=1, output_size=128)

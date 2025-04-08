@@ -6,6 +6,9 @@ from torch_geometric.data import Dataset, Data
 from torch_geometric.loader import DataLoader
 from torch.utils.data import random_split, ConcatDataset
 
+generator = torch.Generator()
+generator.manual_seed(42)
+
 class GraphDataset(Dataset):
     def __init__(self, root, preload=True, transform=None, pre_transform=None):
         super(GraphDataset, self).__init__(root, transform, pre_transform)
